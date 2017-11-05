@@ -4,3 +4,7 @@ offline=false
 flatclasspath=true
 autoexportmavendependencies=false
 fullyexportmavendependencies=true
+
+[compiler]
+source=test-source
+source=source
