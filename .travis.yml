@@ -5,4 +5,4 @@ jdk:
 
 script:
   - ./ceylonb compile
-  - ./ceylonb test test.io.eldermael
+  - ./ceylonb test test.io.eldermael.doombot
