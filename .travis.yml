@@ -4,5 +4,4 @@ jdk:
   - oraclejdk8
 
 script:
-  - ./ceylonb compile
-  - ./ceylonb test test.io.eldermael.doombot
+  - ./build

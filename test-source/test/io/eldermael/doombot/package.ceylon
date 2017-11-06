@@ -1,1 +1,1 @@
-shared package test.io.eldermael.doombot;
+package test.io.eldermael.doombot;
