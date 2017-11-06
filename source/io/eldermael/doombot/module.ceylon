@@ -6,5 +6,6 @@ module io.eldermael.doombot "0.0.1" {
     import maven:org.springframework.boot:"spring-boot-starter" "1.5.8.RELEASE";
     import maven:org.springframework.boot:"spring-boot-starter-web" "1.5.8.RELEASE";
 
+    shared import maven:org.springframework:"spring-web" "4.3.12.RELEASE";
 
 }

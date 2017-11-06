@@ -8,3 +8,10 @@ set -ex
     run test.io.eldermael.doombot \
     ./features/ \
     --glue classpath:test/io/eldermael/doombot
+
+
+if [ "${1}" == "--start" ]; then
+
+    ./ceylonb run io.eldermael.doombot
+
+fi

@@ -4,15 +4,15 @@ import cucumber.api.java8 {
 
 shared class Test() satisfies En {
 
-    \igiven("^a test$", () => {
+    \igiven("^a test$", () {
     });
 
 
-    \iwhen("^a test executes$", () => {
+    \iwhen("^a test executes$", () {
     });
 
 
-    \ithen("^expect this runs$", () => {
+    \ithen("^expect this runs$", () {
     });
 
 }
