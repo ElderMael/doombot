@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation {
 restController {
     \ivalue = "/telegram/webhook";
 }
-restricted (`module test.io.eldermael.doombot`)
+
 shared class WebHookController() {
 
     Logger log = LoggerFactory.getLogger(classForType<WebHookController>());

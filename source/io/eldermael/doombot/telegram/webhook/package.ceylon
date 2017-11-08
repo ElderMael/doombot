@@ -1,3 +1,2 @@
-"Default documentation for package `io.eldermael.doombot.telegram.webhook`."
-
+restricted (`module test.io.eldermael.doombot`)
 shared package io.eldermael.doombot.telegram.webhook;
