@@ -1,2 +1,5 @@
 modules/
 .idea
+
+# Emacs Backups
+*~
