@@ -4,4 +4,4 @@ jdk:
   - oraclejdk8
 
 script:
-  - ./build.sh
+  - backend/build.sh
