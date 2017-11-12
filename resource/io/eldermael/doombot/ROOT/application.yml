@@ -1,0 +1,9 @@
+bot:
+  token: 'ENC(supersecret)'
+
+server:
+  port: 8443
+  ssl:
+    enabled: true
+    key-store: classpath:keystore.jks
+    key-password: 'ENC(supersecret)'
