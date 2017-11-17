@@ -69,6 +69,18 @@ resource "rancher_registration_token" "prod_token" {
   environment_id = "${rancher_environment.prod.id}"
 }
 
+resource "rancher_registry" "google_docker_registry" {
+  provider = "rancher"
+  name = "eldermael_google_registry"
+  server_address = "us.gcr.io"
+  environment_id = "${rancher_environment.prod.id}"
+
+  connection {
+    user = "_json_key"
+    password = "${${file(var.google_keyfile_path)}}"
+  }
+}
+
 resource "google_compute_instance" "rancher_node" {
 
   name = "tf-doombot-rancher-node"
