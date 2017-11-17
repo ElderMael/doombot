@@ -60,24 +60,13 @@ provider "rancher" {
 }
 
 resource "rancher_environment" "prod" {
-  name = "Prod"
+  name = "Doombot"
   orchestration = "cattle"
 }
 
 resource "rancher_registration_token" "prod_token" {
   name = "prod_token"
   environment_id = "${rancher_environment.prod.id}"
-}
-
-resource rancher_host "doombot_rancher_host" {
-  environment_id = "${rancher_environment.prod.id}"
-  name = "tf-doombot-host"
-  description = "Doombot Host"
-  hostname = "doombot.eldermael.io"
-
-  labels {
-    role = "database"
-  }
 }
 
 resource "google_compute_instance" "rancher_node" {
