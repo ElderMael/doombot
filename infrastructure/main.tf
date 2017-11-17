@@ -1,3 +1,14 @@
+variable "rancher_api_url" {
+  description = "Rancher Server API URL"
+}
+
+variable "rancher_secret" {
+  default = ""
+}
+variable "rancher_access" {
+  default = ""
+}
+
 variable "google_keyfile_path" {
   description = "Google API Service Account JSON File"
 }
@@ -12,8 +23,8 @@ variable "region" {
 }
 
 provider "google" {
-  region      = "${var.region}"
-  project     = "${var.google_project_name}"
+  region = "${var.region}"
+  project = "${var.google_project_name}"
   credentials = "${file(var.google_keyfile_path)}"
 }
 
@@ -27,24 +38,57 @@ resource "google_compute_network" "frontend_network" {
 }
 
 resource "google_compute_firewall" "internet" {
-  name    = "tf-doombot-frontend-firewall"
+  name = "tf-doombot-frontend-firewall"
 
   network = "${google_compute_network.frontend_network.name}"
 
   allow {
     protocol = "tcp"
-    ports    = ["80", "8080", "10999", "22"]
+    ports = [
+      "80",
+      "8080",
+      "10999",
+      "22"]
   }
 
 }
 
+provider "rancher" {
+  api_url = "${var.rancher_api_url}"
+  access_key = "${var.rancher_access}"
+  secret_key = "${var.rancher_secret}"
+}
+
+resource "rancher_environment" "prod" {
+  name = "Prod"
+  orchestration = "cattle"
+}
+
+resource "rancher_registration_token" "prod_token" {
+  name = "prod_token"
+  environment_id = "${rancher_environment.prod.id}"
+}
+
+resource rancher_host "doombot_rancher_host" {
+  environment_id = "${rancher_environment.prod.id}"
+  name = "tf-doombot-host"
+  description = "Doombot Host"
+  hostname = "doombot.eldermael.io"
+
+  labels {
+    role = "database"
+  }
+}
+
 resource "google_compute_instance" "rancher_node" {
 
-  name         = "tf-doombot-rancher-node"
-  zone         = "${var.region}-a"
+  name = "tf-doombot-rancher-node"
+  zone = "${var.region}-a"
   machine_type = "n1-standard-2"
 
-  tags = [ "terraform", "rancher-node" ]
+  tags = [
+    "terraform",
+    "rancher-node"]
 
   boot_disk {
     initialize_params {
@@ -63,6 +107,7 @@ resource "google_compute_instance" "rancher_node" {
 
   metadata_startup_script = <<SCRIPT
     curl https://releases.rancher.com/install-docker/17.06.sh | sh
+    ${rancher_registration_token.prod_token.command}
   SCRIPT
 
 }
