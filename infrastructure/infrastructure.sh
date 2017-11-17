@@ -3,7 +3,7 @@
 set -ex
 
 if [ -z "${1}"  ]; then
-    echo "Usage: ./infrastructure <create|deploy>"
+    echo "Usage: ./infrastructure <create|destroy>"
 
     exit 1
 fi
